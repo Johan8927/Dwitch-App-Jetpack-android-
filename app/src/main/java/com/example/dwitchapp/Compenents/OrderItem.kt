@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dwitchapp.models.Order
 import com.example.dwitchapp.models.Ingredient
-import com.example.dwitchapp.models.IngredientType
 import com.example.dwitchapp.models.toIngredientType
 
 @Composable
@@ -59,16 +58,22 @@ fun OrderItem(order: Order) {
 
 @Composable
 fun IngredientChip(ingredient: Ingredient) {
-    val type = ingredient.kind?.toIngredientType() ?: IngredientType.OTHER
-    Row(
-        modifier = Modifier
-            .padding(end = 8.dp)
-            .background(color = type.color, shape = RoundedCornerShape(50))
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(type.emoji, fontSize = 16.sp)
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(ingredient.name ?: "Ingrédient", color = Color.White, fontSize = 12.sp)
+    // Si `kind` est null ou invalide, ne rien afficher
+    val type = ingredient.kind?.toIngredientType()
+
+    // Si `type` est null, on ne crée pas de chip
+    if (type != null) {
+        Row(
+            modifier = Modifier
+                .padding(end = 8.dp)
+                .background(color = type.color, shape = RoundedCornerShape(50))
+                .padding(horizontal = 8.dp, vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(type.emoji, fontSize = 16.sp)
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(ingredient.name ?: "Ingrédient", color = Color.White, fontSize = 12.sp)
+        }
     }
 }
+

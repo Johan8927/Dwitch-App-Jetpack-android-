@@ -4,17 +4,16 @@ import androidx.compose.ui.graphics.Color
 
 enum class IngredientType(val emoji: String, val color: Color) {
     VEGETABLE("🥬", Color(0xFF4CAF50)),
-    SPICY("🌶️", Color(0xFFE53935)),
+    BREAD("🍞", Color(0xFFFFC107)),
     MEAT("🍖", Color(0xFF795548)),
-    DAIRY("🧀", Color(0xFFFFEB3B)),
-    OTHER("🍴", Color(0xFF9E9E9E));
+    DAIRY("🧀", Color(0xFFFFEB3B))
 }
 
-// Extension pour récupérer le type selon une chaîne
-fun String.toIngredientType(): IngredientType = when (this.lowercase()) {
+
+fun String.toIngredientType(): IngredientType? = when (this.lowercase()) {
     "vegetable" -> IngredientType.VEGETABLE
-    "spicy" -> IngredientType.SPICY
+    "bread" -> IngredientType.BREAD
     "meat" -> IngredientType.MEAT
     "dairy" -> IngredientType.DAIRY
-    else -> IngredientType.OTHER
+    else -> null
 }
