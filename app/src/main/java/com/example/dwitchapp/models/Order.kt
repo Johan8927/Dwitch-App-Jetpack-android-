@@ -1,9 +1,12 @@
 package com.example.dwitchapp.models
 
+import java.time.LocalDateTime
+
 // models
 
 data class Order(
     val id: String? = null,
+    val date: LocalDateTime, // Changement en LocalDateTime
     val documentID: String? = null,
     val placedAt: String? = null,
     val receivedAt: String? = null,
@@ -18,8 +21,8 @@ data class Order(
     val store: Store? = null
 )
 
-data class Ingredient (
-    val id: Long? = null,
+data class Ingredient(
+    val id: String? = null,
     val documentID: String? = null,
     val name: String? = null,
     val description: String? = null,
@@ -31,7 +34,7 @@ data class Ingredient (
     val publishedAt: String? = null
 )
 
-data class Store (
+data class Store(
     val id: Long? = null,
     val documentID: String? = null,
     val name: String? = null,
@@ -43,7 +46,7 @@ data class Store (
     val publishedAt: String? = null
 )
 
-data class UsersPermissionsUser (
+data class UsersPermissionsUser(
     val id: Long? = null,
     val documentID: String? = null,
     val username: String? = null,
@@ -59,7 +62,7 @@ data class UsersPermissionsUser (
 // mocks (objets simulés pour instancier les classes)
 
 val mockOrder = Order(
-    id = "1", // Correction ici : chaîne de caractères au lieu de Long
+    id = "1",
     documentID = "ORD123456",
     placedAt = "2024-06-01T10:00:00Z",
     receivedAt = "2024-06-01T11:00:00Z",
@@ -69,9 +72,10 @@ val mockOrder = Order(
     createdAt = "2024-06-01T09:50:00Z",
     updatedAt = "2024-06-01T10:05:00Z",
     publishedAt = "2024-06-01T10:10:00Z",
+    date = LocalDateTime.now(), // Utilisation de LocalDateTime
     ingredients = listOf(
         Ingredient(
-            id = 1L,
+            id = "1",
             documentID = "ING123",
             name = "Tomato",
             description = "Fresh tomatoes",
@@ -105,5 +109,24 @@ val mockOrder = Order(
         createdAt = "2024-04-01T10:00:00Z",
         updatedAt = "2024-05-01T11:00:00Z",
         publishedAt = "2024-05-01T12:00:00Z"
+    )
+)
+
+val mockOrders = listOf(
+    Order(
+        id = "1",
+        date = LocalDateTime.now(),
+        ingredients = listOf(
+            Ingredient(name = "Tomato", kind = "Vegetable"),
+            Ingredient(name = "Chicken", kind = "Meat")
+        )
+    ),
+    Order(
+        id = "2",
+        date = LocalDateTime.now().minusDays(1), // LocalDateTime pour cohérence
+        ingredients = listOf(
+            Ingredient(name = "Bread", kind = "Bread"),
+            Ingredient(name = "Cheese", kind = "Dairy")
+        )
     )
 )
