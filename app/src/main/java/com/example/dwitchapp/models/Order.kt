@@ -118,15 +118,21 @@ val mockOrders = listOf(
         date = LocalDateTime.now(),
         ingredients = listOf(
             Ingredient(name = "Tomato", kind = "Vegetable"),
-            Ingredient(name = "Chicken", kind = "Meat")
+            Ingredient(name = "Chicken", kind = "Meat"),
+            Ingredient(name = "Chili", kind = "Spicy"),
+            Ingredient(name = "Yogurt", kind = "Dairy")
         )
     ),
     Order(
         id = "2",
-        date = LocalDateTime.now().minusDays(1), // LocalDateTime pour cohérence
+        date = LocalDateTime.now().minusDays(1),
         ingredients = listOf(
             Ingredient(name = "Bread", kind = "Bread"),
-            Ingredient(name = "Cheese", kind = "Dairy")
+            Ingredient(name = "Cheese", kind = "Dairy"),
+            Ingredient(name = "Chili", kind = "Spicy"),
+            Ingredient(name = "Yogurt", kind = "Dairy")
+
         )
     )
 )
+

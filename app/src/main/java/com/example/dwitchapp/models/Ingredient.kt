@@ -6,8 +6,10 @@ enum class IngredientType(val emoji: String, val color: Color) {
     VEGETABLE("🥬", Color(0xFF4CAF50)),
     BREAD("🍞", Color(0xFFFFC107)),
     MEAT("🍖", Color(0xFF795548)),
-    DAIRY("🧀", Color(0xFFFFEB3B))
+    DAIRY("🧀", Color(0xFFFFEB3B)),
+    SPICY("🌶️", Color(0xFFF44336))
 }
+
 
 
 fun String.toIngredientType(): IngredientType? = when (this.lowercase()) {
@@ -15,5 +17,6 @@ fun String.toIngredientType(): IngredientType? = when (this.lowercase()) {
     "bread" -> IngredientType.BREAD
     "meat" -> IngredientType.MEAT
     "dairy" -> IngredientType.DAIRY
+    "spicy" -> IngredientType.SPICY
     else -> null
 }

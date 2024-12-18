@@ -23,42 +23,13 @@ import com.example.dwitchapp.ui.theme.DwitchAppTheme
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            DwitchAppTheme {
-                MainScreen()
-            }
-        }
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
     val appBarColor = Color(0xFFEEDEC8) // Couleur commune pour TopBar et BottomBar
 
-    // Exemple de commandes mock
-    val orders = listOf(
-        Order(
-            id = 1.toString(),
-            date = LocalDateTime.now(),
-            ingredients = listOf(
-                Ingredient("Tomato", IngredientType.VEGETABLE.toString()),
-                Ingredient("Cheese", IngredientType.DAIRY.toString())
-            )
-        ),
-        Order(
-            id = 2.toString(),
-            date = LocalDateTime.now().minusDays(1),
-            ingredients = listOf(
-                Ingredient("Beef", IngredientType.MEAT.toString()),
-                Ingredient("Lettuce", IngredientType.VEGETABLE.toString())
-            )
-        )
-    )
+    // Utilisation de mockOrders pour afficher les commandes et les ingrédients
+    val orders = mockOrders // Remplacer par les mockOrders simulées
 
     Scaffold(
         topBar = {
@@ -79,7 +50,8 @@ fun MainScreen() {
                 contentAlignment = Alignment.TopCenter
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text("Commandes avec leurs dates", style = MaterialTheme.typography.titleLarge)
+                    Text("Commandes", style = MaterialTheme.typography.titleLarge)
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     // Affichage des commandes et des dates
                     LazyColumn(
@@ -120,20 +92,25 @@ fun OrderItem(order: Order) {
             .background(color = Color(0xFFE0F7FA), shape = RoundedCornerShape(8.dp))
             .padding(16.dp)
     ) {
-        Text("Commande #${order.id}", color = Color.Black, fontSize = 16.sp)
+        Text("Commande n°${order.id}", color = Color.Black, fontSize = 16.sp)
         Text("Date : $formattedDate", color = Color.Gray, fontSize = 14.sp)
 
         Spacer(modifier = Modifier.height(8.dp))
 
         Text("Ingrédients :", style = MaterialTheme.typography.titleMedium)
+        Spacer(modifier = Modifier.height(4.dp))
+
+        // Affichage des ingrédients
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             items(order.ingredients ?: emptyList()) { ingredient ->
                 IngredientChip(ingredient)
             }
         }
+        // Ajout d'un espacement sous les ingrédients
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 
@@ -150,7 +127,8 @@ fun IngredientChip(ingredient: Ingredient) {
     ) {
         Text(type.emoji, fontSize = 16.sp)
         Spacer(modifier = Modifier.width(4.dp))
-        Text(ingredient.name ?: "Ingrédient", color = Color.White, fontSize = 12.sp)
+        Text(ingredient.name ?: "Ingrédient", color = Color.White, fontSize = 14.sp)
+
     }
 }
 
@@ -161,3 +139,5 @@ fun MainScreenPreview() {
         MainScreen()
     }
 }
+
+
