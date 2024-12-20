@@ -120,7 +120,7 @@ val mockOrders = listOf(
             Ingredient(name = "Tomato", kind = "Vegetable"),
             Ingredient(name = "Chicken", kind = "Meat"),
             Ingredient(name = "Chili", kind = "Spicy"),
-            Ingredient(name = "Yogurt", kind = "Dairy")
+            Ingredient(name = "Cheese", kind = "Dairy")
         )
     ),
     Order(
@@ -129,9 +129,18 @@ val mockOrders = listOf(
         ingredients = listOf(
             Ingredient(name = "Bread", kind = "Bread"),
             Ingredient(name = "Cheese", kind = "Dairy"),
+            Ingredient(name = "Lettuce", kind = "Vegetable"),
+            Ingredient(name = "Chorizo", kind = "Meat")
+        )
+    ),
+    Order(
+        id = "3",
+        date = LocalDateTime.now().minusHours(2),
+        ingredients = listOf(
+            Ingredient(name = "Lettuce", kind = "Vegetable"),
+            Ingredient(name = "Beef", kind = "Meat"),
             Ingredient(name = "Chili", kind = "Spicy"),
             Ingredient(name = "Yogurt", kind = "Dairy")
-
         )
     )
 )

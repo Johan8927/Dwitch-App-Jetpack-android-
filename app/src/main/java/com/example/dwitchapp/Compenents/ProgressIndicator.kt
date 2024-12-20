@@ -11,7 +11,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.dwitchapp.models.mockOrders
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
@@ -19,8 +18,9 @@ import androidx.compose.runtime.setValue
 
 @Composable
 fun ProgressIndicator() {
-    var loading by remember { mutableStateOf(false) } // Gère l'état de chargement
-    val scope = rememberCoroutineScope() // Crée un scope de coroutine pour gérer les tâches asynchrones
+    var currentProgress by remember { mutableStateOf(0f) }
+    var loading by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope() // Create a coroutine scope
 
     Column(
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -30,24 +30,29 @@ fun ProgressIndicator() {
         Button(onClick = {
             loading = true
             scope.launch {
-                loadProgress() // Lance la progression
-                loading = false // Réinitialise l'état de chargement une fois la coroutine terminée
+                loadProgress { progress ->
+                    currentProgress = progress
+                }
+                loading = false // Reset loading when the coroutine finishes
             }
         }, enabled = !loading) {
-            Text("Start loading") // Bouton qui lance le chargement
+            Text("Start loading")
         }
 
-        // Affiche la barre de progression pour chaque commande dans mockOrders
         if (loading) {
-            mockOrders.forEach { order ->
-                order.progress?.let { progress ->
-                    LinearProgressIndicator(
-                        progress = progress / 100f, // Calcul de la progression sur 100%
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                }
-            }
+            LinearProgressIndicator(
+                progress = { currentProgress },
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
+    }
+}
+
+/** Iterate the progress value */
+suspend fun loadProgress(updateProgress: (Float) -> Unit) {
+    for (i in 1..100) {
+        updateProgress(i.toFloat() / 100)
+        delay(100)
     }
 }
 

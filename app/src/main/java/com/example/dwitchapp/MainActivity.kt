@@ -23,7 +23,6 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -36,7 +35,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.dwitchapp.Compenents.ProgressIndicator
-import com.example.dwitchapp.Compenents.loadProgress
 import com.example.dwitchapp.models.mockOrders
 // Importe les données simulées des commandes depuis le package `models`.
 
@@ -48,6 +46,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             DwitchAppTheme { // Applique le thème de l'application
+                MainScreen() // Affiche le composable `MainScreen`
             }
         }
     }
@@ -73,7 +72,7 @@ fun MainScreen() {
                         Image(
                             painter = painterResource(id = R.drawable.ic_launcher_foreground),
                             // Charge l'icône `ic_launcher_foreground` depuis les ressources.
-                            contentDescription = "Logo", // Description pour l'accessibilité.
+                            contentDescription = "Logo Dwitch App", // Description pour l'accessibilité.
                             modifier = Modifier.padding(end = 8.dp), // Ajoute un espace après l'image.
                             contentScale = ContentScale.Fit // Ajuste l'image pour qu'elle conserve ses proportions.
                         )
@@ -154,3 +153,6 @@ fun MainScreenPreview() {
         MainScreen() // Affiche le composable `MainScreen` dans l'aperçu.
     }
 }
+
+
+

@@ -13,6 +13,7 @@ android {
     defaultConfig {
         applicationId = "com.example.dwitchapp"
         minSdk = 26
+        //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
