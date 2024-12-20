@@ -56,7 +56,3 @@ suspend fun loadProgress(updateProgress: (Float) -> Unit) {
     }
 }
 
-suspend fun loadProgress() {
-    // Simule un délai pour le chargement, ajustez selon le besoin
-    delay(1000)
-}
